@@ -1,0 +1,68 @@
+/*
+
+ Sage Ridge Coding
+ Exercise: 22.02a
+ Description: Field of hexagons. An example of the translate function with polygons.
+ Christopher von Nagy
+ 
+ */
+
+
+// Load some libraries or none
+
+// Declare some variables or objects
+float hexagon_radius = 75.0;
+float hexagon_width;
+
+// Setup
+void setup() {
+  colorMode(HSB, 359, 255, 255);
+  size(1200, 800);
+  background(0, 0, 255);
+  stroke(359, 255, 255);
+  strokeWeight(1.5);
+  frameRate(1);
+  noFill();
+  noLoop();
+  ellipseMode(RADIUS);
+  hexagon_width = cos(radians(30)) * hexagon_radius;
+}
+
+// Loop with draw
+void draw() {
+
+  for (int col = 0; col < (width/hexagon_width); col++) {
+    for (int row = 0;  row < (height/hexagon_width); row++) {
+      float x = col * hexagon_width * 2;
+      float y = row * hexagon_width * 2;
+      println(x, y);
+      pushMatrix();
+        translate(x,y);
+        rotate(radians(30));
+        hexagon(0, 0, hexagon_radius);
+      popMatrix();
+    }
+  }
+}
+
+// Functions
+
+void hexagon(float x, float y, float center_to_apex) {
+  polygon(x, y, center_to_apex, 6);
+}
+
+void tabbed_hexagon(float x, float y, float center_to_apex, char rotation) {
+  polygon(0, 0, 82, 6);
+  polygon(0, 0, 82, 4);
+}
+
+void polygon(float x, float y, float radius, int npoints) {
+  float angle = TWO_PI / npoints;
+  beginShape();
+  for (float a = 0; a < TWO_PI; a += angle) {
+    float sx = x + cos(a) * radius;
+    float sy = y + sin(a) * radius;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
+}
