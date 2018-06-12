@@ -1,5 +1,6 @@
 /*
 Sage Ridge Coding
+Christopher von Nagy
 
 ElectroSketch
 
